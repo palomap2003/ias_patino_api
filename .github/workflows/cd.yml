@@ -29,5 +29,5 @@ jobs:
     environment: production
 
     steps:
-    - name: Deploy PRD
-      run: "curl ${{ secrets.RENDER_DEPLOY_HOOK_PRD }}"
+      - name: Deploy PRD
+        run: "curl ${{ secrets.RENDER_DEPLOY_HOOK_PRD }}"
