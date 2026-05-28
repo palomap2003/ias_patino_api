@@ -22,8 +22,27 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements-dev.txt
 
-      - name: Ejecutar tests
-        run: pytest
+      - name: Ejecutar tests unitarios e integración
+        run: pytest tests/
 
       - name: Ejecutar Bandit
         run: bandit -r app/
+
+  security-tests:
+    if: github.base_ref == 'main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Instalar dependencias
+        run: pip install -r requirements-dev.txt
+
+      - name: Ejecutar tests de seguridad
+        run: pytest tests/test_security.py
