@@ -6,6 +6,13 @@ from app.models import db, Usuario
 app = Flask(__name__)
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace(
+        "postgres://",
+        "postgresql://",
+        1
+    )
 DEBUG_MODE = os.environ.get("DEBUG", "false").lower() in ["true", "1", "t"]
 
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
