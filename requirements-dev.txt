@@ -1,4 +1,6 @@
 flask
+flask_sqlalchemy
 pytest
 bandit
 gunicorn
+psycopg2-binary

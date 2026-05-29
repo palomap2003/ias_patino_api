@@ -22,3 +22,12 @@ jobs:
     steps:
       - name: Deploy QA
         run: "curl ${{ secrets.RENDER_DEPLOY_HOOK_QA }}"
+
+  deploy-prd:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Deploy PRD
+        run: "curl ${{ secrets.RENDER_DEPLOY_HOOK_PRD }}"
