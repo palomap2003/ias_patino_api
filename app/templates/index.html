@@ -1,0 +1,24 @@
+<h1>ABM Usuarios</h1>
+
+<form action="/crear" method="POST">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="email" name="email" placeholder="Email" required>
+
+    <button type="submit">Agregar</button>
+</form>
+
+<hr>
+
+<ul>
+    {% for usuario in usuarios %}
+        <li>
+            {{ usuario.nombre }} - {{ usuario.email }}
+
+            <a href="/editar/{{ usuario.id }}">Editar</a>
+
+            <a href="/eliminar/{{ usuario.id }}">
+                Eliminar
+            </a>
+        </li>
+    {% endfor %}
+</ul>
