@@ -28,6 +28,9 @@ with app.app_context():
 def index():
     usuarios = Usuario.query.all()
     return render_template("index.html", usuarios=usuarios)
+@app.route("/health")
+def health():
+    return {"status": "ok"}, 200
 
 @app.route("/crear", methods=["POST"])
 def crear():
