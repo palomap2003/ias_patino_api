@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
-if DATABASE_URL.startswith("postgres://"):
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace(
         "postgres://",
         "postgresql://",
@@ -28,6 +28,9 @@ with app.app_context():
 def index():
     usuarios = Usuario.query.all()
     return render_template("index.html", usuarios=usuarios)
+@app.route("/health")
+def health():
+    return {"status": "ok"}, 200
 
 @app.route("/crear", methods=["POST"])
 def crear():
