@@ -1,24 +1,182 @@
-<h1>ABM Usuarios</h1>
 
-<form action="/crear" method="POST">
-    <input type="text" name="nombre" placeholder="Nombre" required>
-    <input type="email" name="email" placeholder="Email" required>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAS Patiño API</title>
 
-    <button type="submit">Agregar</button>
-</form>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf6f9;
+            margin: 0;
+            padding: 0;
+        }
 
-<hr>
+        .container {
+            width: 80%;
+            margin: 40px auto;
+        }
 
-<ul>
-    {% for usuario in usuarios %}
-        <li>
-            {{ usuario.nombre }} - {{ usuario.email }}
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-            <a href="/editar/{{ usuario.id }}">Editar</a>
+        .header h1 {
+            color: #b57edc;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
 
-            <a href="/eliminar/{{ usuario.id }}">
-                Eliminar
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+        .header p {
+            color: #777;
+            font-size: 18px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #8d6cab;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #e4d4f4;
+            border-radius: 10px;
+            background-color: #faf7fd;
+        }
+
+        button {
+            background-color: #cdb4db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #b185c9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #e9d8f4;
+            color: #5c5470;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        a {
+            text-decoration: none;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .edit {
+            color: #7b6cf6;
+        }
+
+        .delete {
+            color: #ff6b81;
+        }
+
+        .empty {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>IAS Patiño API</h1>
+        <p>Sistema ABM de Usuarios</p>
+    </div>
+
+    <div class="card">
+        <h2>Agregar Usuario</h2>
+
+        <form action="/crear" method="POST">
+
+            <input type="text" name="nombre" placeholder="Nombre" required>
+
+            <input type="email" name="email" placeholder="Email" required>
+
+            <button type="submit">Guardar Usuario</button>
+
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Usuarios Registrados</h2>
+
+        {% if usuarios %}
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+
+            {% for usuario in usuarios %}
+
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.email }}</td>
+
+                <td>
+                    <a class="edit" href="/editar/{{ usuario.id }}">Editar</a>
+
+                    <a class="delete" href="/eliminar/{{ usuario.id }}">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+            No hay usuarios cargados todavía.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
+
